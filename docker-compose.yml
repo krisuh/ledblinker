@@ -1,0 +1,20 @@
+version: '3'
+services:
+  edge_service:
+    build: .
+    image: tyhjataulu/ledblinker:latest
+    volumes:
+      - /dev/gpiomem:/dev/gpiomem
+    privileged: true
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 50M
+        reservations:
+          memory: 10M
+      placement:
+        constraints:
+          - node.labels.location == edge
+          - node.labels.arch == arm
+          - node.hostname == raspi3
