@@ -5,6 +5,7 @@ services:
     image: tyhjataulu/ledblinker:latest
     volumes:
       - /dev/gpiomem:/dev/gpiomem
+      - /dev/mem:/dev/mem
     privileged: true
     deploy:
       mode: global
