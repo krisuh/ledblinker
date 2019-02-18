@@ -20,12 +20,14 @@ func main() {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go blinkForever(rpio.Pin(17))
 	<-c
+	rpio.Pin(17).Low()
 	os.Exit(0)
 }
 
 func blinkForever(led rpio.Pin) {
 	led.Output()
 	for {
+		time.Sleep(time.Second)
 		led.High()
 		time.Sleep(time.Second)
 		led.Low()
